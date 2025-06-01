@@ -1,0 +1,16 @@
+{
+    "name": "Wishlist Website",
+    "short_name": "Wishlist",
+    "background_color": "#6777ef",
+    "display": "fullscreen",
+    "description": "Create and share your perfect wishlist!",
+    "theme_color": "#6777ef",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "wishlist.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
