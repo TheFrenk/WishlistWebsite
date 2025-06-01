@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');
 
-Route::get('/create', function () {
-   return view('create');
-})->name('create');
+Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
+    Route::get('/', 'IndexController')->name('main.index');
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Wishlist', 'prefix' => 'wishes'], function () {
+   Route::get('/create', 'IndexController')->name('wishlist.create');
+});
