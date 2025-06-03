@@ -44,7 +44,7 @@
                 <a href="{{ route('wishlist.create') }}" class="text-gray-700 hover:text-primary px-4 py-2 text-sm font-medium whitespace-nowrap">
                     Create
                 </a>
-                <button class="ml-4 bg-primary text-white px-4 py-2 rounded-button text-sm font-medium hover:bg-opacity-90 whitespace-nowrap">
+                <button class="ml-4 bg-primary text-white px-4 py-2 rounded-button text-sm font-medium hover:bg-blue-800 whitespace-nowrap">
                     Register
                 </button>
             </div>
@@ -63,10 +63,10 @@
                 and family for birthdays, holidays, or just because.
             </p>
             <div class="mt-8 flex flex-col sm:flex-row gap-4">
-                <a href="{{ route('wishlist.create') }}" class="bg-primary text-white px-8 py-3 rounded-button text-base font-medium hover:bg-opacity-90 whitespace-nowrap !rounded-button">
+                <a href="{{ route('wishlist.create') }}" class="bg-primary text-white px-8 py-3 rounded-button text-base font-medium hover:bg-blue-800 whitespace-nowrap !rounded-button">
                     Get Started
                 </a>
-                <button class="bg-white text-primary border border-primary px-8 py-3 rounded-button text-base font-medium hover:bg-gray-50 whitespace-nowrap !rounded-button">
+                <button class="bg-white text-primary border border-primary px-8 py-3 rounded-button text-base font-medium hover:bg-gray-100 whitespace-nowrap !rounded-button">
                     Learn More
                 </button>
             </div>
@@ -241,105 +241,35 @@
         </div>
     </div>
 </section>
-<!-- Testimonials Section -->
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-            <h2 class="text-3xl font-bold text-gray-900">What Our Users Say</h2>
-            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-                Thousands of people use WishKeeper to organize their wishes.
-            </p>
-        </div>
-        <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <!-- Testimonial 1 -->
-            <div class="bg-gray-50 rounded-lg p-8 shadow-sm">
-                <div class="flex items-center mb-4">
-                    <div class="text-primary">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                    </div>
-                </div>
-                <p class="text-gray-600 italic">
-                    "WishKeeper has completely transformed how I organize gift ideas.
-                    My family always knows exactly what I want for birthdays and
-                    holidays now!"
-                </p>
-                <div class="mt-6 flex items-center">
-                    <img
-                        class="h-10 w-10 rounded-full"
-                        src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20woman%20with%20curly%20dark%20hair%2C%20smiling%2C%20casual%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=testi1&orientation=squarish"
-                        alt=""
-                    />
-                    <div class="ml-3">
-                        <p class="text-sm font-medium text-gray-900">Emma Thompson</p>
-                        <p class="text-sm text-gray-500">Marketing Manager</p>
-                    </div>
-                </div>
+<!-- Wishlists Counter Section -->
+<section class="py-20 bg-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4">
+            Our Wishlists inspire
+        </h2>
+        <p class="text-gray-600 text-lg mb-10">
+            Every day there are more and more Wishlists. Let yourself be enchanted and create your own now.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-8 mb-10 text-pink-700 font-semibold text-2xl">
+            <div>
+                <p>149.618</p>
+                <p class="text-sm text-gray-500 font-normal">Wishlists</p>
             </div>
-            <!-- Testimonial 2 -->
-            <div class="bg-gray-50 rounded-lg p-8 shadow-sm">
-                <div class="flex items-center mb-4">
-                    <div class="text-primary">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                    </div>
-                </div>
-                <p class="text-gray-600 italic">
-                    "As a parent, I use WishKeeper to keep track of what my kids want.
-                    It's so much easier than trying to remember everything they
-                    mention throughout the year."
-                </p>
-                <div class="mt-6 flex items-center">
-                    <img
-                        class="h-10 w-10 rounded-full"
-                        src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20middle-aged%20man%20with%20salt%20and%20pepper%20hair%2C%20smiling%2C%20casual%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=testi2&orientation=squarish"
-                        alt=""
-                    />
-                    <div class="ml-3">
-                        <p class="text-sm font-medium text-gray-900">
-                            Michael Rodriguez
-                        </p>
-                        <p class="text-sm text-gray-500">Software Engineer</p>
-                    </div>
-                </div>
+            <div>
+                <p>1.864.641</p>
+                <p class="text-sm text-gray-500 font-normal">Wishes</p>
             </div>
-            <!-- Testimonial 3 -->
-            <div class="bg-gray-50 rounded-lg p-8 shadow-sm">
-                <div class="flex items-center mb-4">
-                    <div class="text-primary">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-half-fill"></i>
-                    </div>
-                </div>
-                <p class="text-gray-600 italic">
-                    "I love how I can organize different wishlists for different
-                    occasions. The price tracking feature has saved me so much money
-                    on items I was planning to buy anyway!"
-                </p>
-                <div class="mt-6 flex items-center">
-                    <img
-                        class="h-10 w-10 rounded-full"
-                        src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20asian%20woman%20with%20long%20black%20hair%2C%20smiling%2C%20casual%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=testi3&orientation=squarish"
-                        alt=""
-                    />
-                    <div class="ml-3">
-                        <p class="text-sm font-medium text-gray-900">Jennifer Chen</p>
-                        <p class="text-sm text-gray-500">UX Designer</p>
-                    </div>
-                </div>
+            <div>
+                <p>605.858</p>
+                <p class="text-sm text-gray-500 font-normal">Fulfilled wishes</p>
             </div>
         </div>
+        <a href="#" class="inline-block bg-primary hover:bg-blue-800 text-white text-lg font-semibold py-3 px-6 rounded shadow">
+            Create Wishlist
+        </a>
     </div>
 </section>
+
 <!-- Footer -->
 <footer class="bg-gray-800 text-white py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -469,7 +399,7 @@
         <div
             class="mt-12 pt-8 border-t border-gray-700 text-center text-gray-400 text-sm"
         >
-            <p>© 2025 WishKeeper. All rights reserved.</p>
+            <p>© {{ date("Y") }} WishKeeper. All rights reserved.</p>
         </div>
     </div>
 </footer>

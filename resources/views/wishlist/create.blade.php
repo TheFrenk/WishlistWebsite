@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    @PwaHead
-    <title>Wishlist</title>
-    @vite('resources/css/app.css')
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"/>
+@extends('wishlist.layouts.main')
+@push('styles')
     <style>
         :where([class^="ri-"])::before { content: "\f3c2"; }
         input[type=number]::-webkit-inner-spin-button,
@@ -24,23 +15,10 @@
             border: 2px dashed #4f46e5;
         }
     </style>
-</head>
-<body class="bg-gray-50 min-h-screen">
-<header class="bg-white shadow-sm">
-    <div
-        class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between"
-    >
-        <div class="flex items-center space-x-4">
-            <a href="{{ route('main.index') }}" class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-primary transition-colors">
-                <i class="ri-arrow-left-line ri-lg"></i>
-            </a>
-            <h1 class="text-2xl font-semibold text-gray-800">Create Wishlist</h1>
-        </div>
-        <a href="#" class="font-['Pacifico'] text-primary text-2xl">WishKeeper</a>
-    </div>
-</header>
+@endpush
 
-<main class="max-w-3xl mx-auto px-4 py-8">
+@section('content')
+<main class="max-w-3xl mx-auto px-4 py-25">
     <div class="bg-white shadow rounded-lg p-6 mb-6">
         <p class="text-gray-600 mb-6">
             Create your wishlist without an account. You'll receive a unique link
@@ -318,30 +296,6 @@
         </div>
     </div>
 </main>
-
-<footer class="bg-white border-t border-t-gray-200 mt-12">
-    <div class="max-w-6xl mx-auto px-4 py-8">
-        <div
-            class="flex flex-col md:flex-row justify-between items-center gap-4"
-        >
-            <p class="text-gray-600 text-sm">
-                By creating a wishlist, you agree to our
-                <a href="#" class="text-primary hover:underline">Terms of Use</a>.
-            </p>
-            <div class="flex items-center space-x-6">
-                <a href="#" class="text-gray-600 hover:text-primary transition"
-                >Create an Account</a
-                >
-                <a href="#" class="text-gray-600 hover:text-primary transition"
-                >Help & FAQ</a
-                >
-            </div>
-        </div>
-        <div class="mt-8 text-center text-gray-500 text-sm">
-            <p>© 2025 Wishlist Service. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
 
 <script id="itemTemplate">
     function createItemTemplate(index) {
@@ -657,7 +611,4 @@
         });
     });
 </script>
-</body>
-</html>
-@RegisterServiceWorkerScript
-</html>
+@endsection
