@@ -5,148 +5,475 @@
     @PwaHead
     <title>Wishlist</title>
     @vite('resources/css/app.css')
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" integrity="sha512-XcIsjKMcuVe0Ucj/xgIXQnytNwBttJbNjltBV18IOnru2lDPe9KRRyvCXw6Y5H415vbBLRm8+q6fmLUU7DfO6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .hero-section {
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 1) 40%, rgba(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0.4) 80%, rgba(255, 255, 255, 0) 100%), url('https://readdy.ai/api/search-image?query=A%20beautiful%20organized%20collection%20of%20wishlist%20items%20displayed%20elegantly%20on%20a%20clean%20surface.%20Modern%20minimalist%20aesthetic%20with%20soft%20lighting.%20Items%20include%20tech%20gadgets%2C%20fashion%20accessories%2C%20home%20decor%2C%20and%20books%20arranged%20in%20a%20visually%20pleasing%20composition.%20The%20background%20is%20a%20soft%20gradient%20of%20light%20colors%20creating%20a%20dreamy%20atmosphere.&width=1200&height=800&seq=hero1&orientation=landscape');
+            background-size: cover;
+            background-position: center right;
+        }
+    </style>
 </head>
-<body>
-<header>
-    <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-            <a href="https://flowbite.com" class="flex items-center">
-                <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
-                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Wishlist</span>
-            </a>
-            <div class="flex items-center lg:order-2">
-                <a href="#" class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Sign in</a>
-                <a href="{{ route('wishlist.create') }}" class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">New wishlist</a>
-                <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-                    <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+<body class="bg-gray-50 min-h-screen">
+<!-- Navigation -->
+<nav class="bg-white shadow-sm fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <div class="flex items-center">
+                <a href="#" class="font-['Pacifico'] text-primary text-2xl">WishKeeper</a>
+                <div class="hidden md:ml-10 md:flex md:space-x-8">
+                    <a href="#" class="text-gray-900 hover:text-primary px-3 py-2 text-sm font-medium border-b-2 border-primary">Home</a>
+                    <a href="#" class="text-gray-500 hover:text-primary px-3 py-2 text-sm font-medium">Features</a>
+                    <a href="#" class="text-gray-500 hover:text-primary px-3 py-2 text-sm font-medium">How It Works</a>
+                </div>
+            </div>
+            <div class="flex items-center">
+                <a href="{{ route('wishlist.create') }}" class="text-gray-700 hover:text-primary px-4 py-2 text-sm font-medium whitespace-nowrap">
+                    Create
+                </a>
+                <button class="ml-4 bg-primary text-white px-4 py-2 rounded-button text-sm font-medium hover:bg-opacity-90 whitespace-nowrap">
+                    Register
                 </button>
             </div>
-            <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
-                <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+        </div>
+    </div>
+</nav>
+<!-- Hero Section -->
+<section class="hero-section pt-32 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="max-w-2xl">
+            <h1 class="text-4xl font-bold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+                Create, organize and share your wishlists
+            </h1>
+            <p class="mt-5 text-xl text-gray-600">
+                Keep track of everything you want in one place. Share with friends
+                and family for birthdays, holidays, or just because.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                <a href="{{ route('wishlist.create') }}" class="bg-primary text-white px-8 py-3 rounded-button text-base font-medium hover:bg-opacity-90 whitespace-nowrap !rounded-button">
+                    Get Started
+                </a>
+                <button class="bg-white text-primary border border-primary px-8 py-3 rounded-button text-base font-medium hover:bg-gray-50 whitespace-nowrap !rounded-button">
+                    Learn More
+                </button>
+            </div>
+            <div class="mt-8 flex items-center">
+                <div class="flex -space-x-2">
+                    <img
+                        class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
+                        src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20woman%20with%20short%20brown%20hair%2C%20smiling%2C%20business%20casual%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=user1&orientation=squarish"
+                        alt=""
+                    />
+                    <img
+                        class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
+                        src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20middle-aged%20man%20with%20glasses%20and%20short%20dark%20hair%2C%20smiling%2C%20business%20casual%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=user2&orientation=squarish"
+                        alt=""
+                    />
+                    <img
+                        class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
+                        src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20woman%20with%20long%20blonde%20hair%2C%20smiling%2C%20business%20casual%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=user3&orientation=squarish"
+                        alt=""
+                    />
+                </div>
+                <p class="ml-4 text-sm text-gray-700">
+                    Joined by <span class="font-medium">50,000+</span> users
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Features Section -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="text-3xl font-bold text-gray-900">
+                Why Choose WishKeeper?
+            </h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                Our platform makes wishlist creation simple, organized, and social.
+            </p>
+        </div>
+        <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Feature 1 -->
+            <div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+                <div class="w-12 h-12 flex items-center justify-center rounded-full bg-primary bg-opacity-10 text-white mb-5">
+                    <i class="ri-folder-add-line ri-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900">
+                    Easy Organization
+                </h3>
+                <p class="mt-4 text-gray-600">
+                    Create multiple wishlists for different occasions and categories.
+                    Keep everything organized in one place.
+                </p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+                <div class="w-12 h-12 flex items-center justify-center rounded-full bg-primary bg-opacity-10 text-white mb-5">
+                    <i class="ri-share-line ri-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900">Simple Sharing</h3>
+                <p class="mt-4 text-gray-600">
+                    Share your wishlists with friends and family via email, social
+                    media, or a unique link.
+                </p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+                <div class="w-12 h-12 flex items-center justify-center rounded-full bg-primary bg-opacity-10 text-white mb-5">
+                    <i class="ri-notification-line ri-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900">
+                    Smart Notifications
+                </h3>
+                <p class="mt-4 text-gray-600">
+                    Get alerts for price drops, back-in-stock items, and when someone
+                    purchases from your list.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- How It Works Section -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="text-3xl font-bold text-gray-900">How It Works</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                Creating and sharing wishlists has never been easier.
+            </p>
+        </div>
+        <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <!-- Step 1 -->
+            <div class="relative">
+                <div
+                    class="absolute -left-4 -top-4 w-12 h-12 flex items-center justify-center rounded-full bg-primary text-white font-bold text-lg"
+                >
+                    1
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm h-full">
+                    <img
+                        src="https://readdy.ai/api/search-image?query=A%20person%20creating%20an%20account%20on%20a%20wishlist%20website%2C%20shown%20from%20above%20with%20hands%20typing%20on%20keyboard%2C%20modern%20clean%20desk%20setup%20with%20minimalist%20aesthetic%2C%20soft%20lighting%2C%20high%20quality%20detailed%20image&width=400&height=300&seq=step1&orientation=landscape"
+                        alt="Sign Up"
+                        class="w-full h-40 object-cover rounded mb-4"
+                    />
+                    <h3 class="text-lg font-semibold text-gray-900">Sign Up</h3>
+                    <p class="mt-2 text-gray-600">
+                        Create your free account in seconds with email or social login.
+                    </p>
+                </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="relative">
+                <div
+                    class="absolute -left-4 -top-4 w-12 h-12 flex items-center justify-center rounded-full bg-primary text-white font-bold text-lg"
+                >
+                    2
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm h-full">
+                    <img
+                        src="https://readdy.ai/api/search-image?query=A%20person%20creating%20a%20new%20wishlist%20on%20a%20digital%20device%2C%20shown%20with%20organized%20categories%20and%20items%20being%20added%20to%20a%20wishlist%2C%20modern%20clean%20desk%20setup%20with%20minimalist%20aesthetic%2C%20soft%20lighting%2C%20high%20quality%20detailed%20image&width=400&height=300&seq=step2&orientation=landscape"
+                        alt="Create Wishlist"
+                        class="w-full h-40 object-cover rounded mb-4"
+                    />
+                    <h3 class="text-lg font-semibold text-gray-900">
+                        Create Wishlist
+                    </h3>
+                    <p class="mt-2 text-gray-600">
+                        Name your wishlist, choose privacy settings, and add a
+                        description.
+                    </p>
+                </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="relative">
+                <div
+                    class="absolute -left-4 -top-4 w-12 h-12 flex items-center justify-center rounded-full bg-primary text-white font-bold text-lg"
+                >
+                    3
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm h-full">
+                    <img
+                        src="https://readdy.ai/api/search-image?query=A%20person%20adding%20items%20to%20a%20wishlist%2C%20browsing%20products%20on%20a%20laptop%20or%20tablet%2C%20with%20product%20cards%20being%20added%20to%20a%20collection%2C%20modern%20clean%20desk%20setup%20with%20minimalist%20aesthetic%2C%20soft%20lighting%2C%20high%20quality%20detailed%20image&width=400&height=300&seq=step3&orientation=landscape"
+                        alt="Add Items"
+                        class="w-full h-40 object-cover rounded mb-4"
+                    />
+                    <h3 class="text-lg font-semibold text-gray-900">Add Items</h3>
+                    <p class="mt-2 text-gray-600">
+                        Add items from any website using our browser extension or manual
+                        entry.
+                    </p>
+                </div>
+            </div>
+            <!-- Step 4 -->
+            <div class="relative">
+                <div
+                    class="absolute -left-4 -top-4 w-12 h-12 flex items-center justify-center rounded-full bg-primary text-white font-bold text-lg"
+                >
+                    4
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm h-full">
+                    <img
+                        src="https://readdy.ai/api/search-image?query=A%20person%20sharing%20a%20wishlist%20with%20friends%20via%20social%20media%20or%20email%2C%20shown%20with%20sharing%20interface%20and%20multiple%20devices%2C%20modern%20clean%20desk%20setup%20with%20minimalist%20aesthetic%2C%20soft%20lighting%2C%20high%20quality%20detailed%20image&width=400&height=300&seq=step4&orientation=landscape"
+                        alt="Share"
+                        class="w-full h-40 object-cover rounded mb-4"
+                    />
+                    <h3 class="text-lg font-semibold text-gray-900">Share</h3>
+                    <p class="mt-2 text-gray-600">
+                        Share your wishlist with friends and family through multiple
+                        channels.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="text-3xl font-bold text-gray-900">What Our Users Say</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                Thousands of people use WishKeeper to organize their wishes.
+            </p>
+        </div>
+        <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Testimonial 1 -->
+            <div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+                <div class="flex items-center mb-4">
+                    <div class="text-primary">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                    </div>
+                </div>
+                <p class="text-gray-600 italic">
+                    "WishKeeper has completely transformed how I organize gift ideas.
+                    My family always knows exactly what I want for birthdays and
+                    holidays now!"
+                </p>
+                <div class="mt-6 flex items-center">
+                    <img
+                        class="h-10 w-10 rounded-full"
+                        src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20woman%20with%20curly%20dark%20hair%2C%20smiling%2C%20casual%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=testi1&orientation=squarish"
+                        alt=""
+                    />
+                    <div class="ml-3">
+                        <p class="text-sm font-medium text-gray-900">Emma Thompson</p>
+                        <p class="text-sm text-gray-500">Marketing Manager</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Testimonial 2 -->
+            <div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+                <div class="flex items-center mb-4">
+                    <div class="text-primary">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                    </div>
+                </div>
+                <p class="text-gray-600 italic">
+                    "As a parent, I use WishKeeper to keep track of what my kids want.
+                    It's so much easier than trying to remember everything they
+                    mention throughout the year."
+                </p>
+                <div class="mt-6 flex items-center">
+                    <img
+                        class="h-10 w-10 rounded-full"
+                        src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20middle-aged%20man%20with%20salt%20and%20pepper%20hair%2C%20smiling%2C%20casual%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=testi2&orientation=squarish"
+                        alt=""
+                    />
+                    <div class="ml-3">
+                        <p class="text-sm font-medium text-gray-900">
+                            Michael Rodriguez
+                        </p>
+                        <p class="text-sm text-gray-500">Software Engineer</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Testimonial 3 -->
+            <div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+                <div class="flex items-center mb-4">
+                    <div class="text-primary">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-half-fill"></i>
+                    </div>
+                </div>
+                <p class="text-gray-600 italic">
+                    "I love how I can organize different wishlists for different
+                    occasions. The price tracking feature has saved me so much money
+                    on items I was planning to buy anyway!"
+                </p>
+                <div class="mt-6 flex items-center">
+                    <img
+                        class="h-10 w-10 rounded-full"
+                        src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20asian%20woman%20with%20long%20black%20hair%2C%20smiling%2C%20casual%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait&width=100&height=100&seq=testi3&orientation=squarish"
+                        alt=""
+                    />
+                    <div class="ml-3">
+                        <p class="text-sm font-medium text-gray-900">Jennifer Chen</p>
+                        <p class="text-sm text-gray-500">UX Designer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <a href="#" class="font-['Pacifico'] text-white text-2xl"
+                >WishKeeper</a
+                >
+                <p class="mt-4 text-gray-400 text-sm">
+                    The easiest way to create, organize, and share your wishlists.
+                </p>
+                <div class="mt-6 flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <div
+                            class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700"
+                        >
+                            <i class="ri-facebook-fill"></i>
+                        </div>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <div
+                            class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700"
+                        >
+                            <i class="ri-twitter-x-fill"></i>
+                        </div>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <div
+                            class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700"
+                        >
+                            <i class="ri-instagram-fill"></i>
+                        </div>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <div
+                            class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700"
+                        >
+                            <i class="ri-pinterest-fill"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h3
+                    class="text-sm font-semibold text-gray-300 uppercase tracking-wider"
+                >
+                    Product
+                </h3>
+                <ul class="mt-4 space-y-2">
                     <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">Home</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm"
+                        >Features</a
+                        >
                     </li>
                     <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Company</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm"
+                        >Pricing</a
+                        >
                     </li>
                     <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Marketplace</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm"
+                        >Browser Extension</a
+                        >
                     </li>
                     <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Features</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Team</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm"
+                        >Mobile App</a
+                        >
                     </li>
                 </ul>
             </div>
-        </div>
-    </nav>
-</header>
-<section class="bg-white dark:bg-gray-900">
-    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
-        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Make a wish!</h1>
-        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Create your Wishlist online now, share it with your family and friends and get gifted.</p>
-        <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-            <a href="{{ route('wishlist.create') }}" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                Create
-                <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-            </a>
-            <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                Register
-            </a>
-        </div>
-    </div>
-</section>
-<section class="bg-white dark:bg-gray-900">
-    <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
-        <div class="max-w-screen-md mb-8 lg:mb-16">
-            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Designed for business teams like yours</h2>
-            <p class="text-gray-500 sm:text-xl dark:text-gray-400">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
-        </div>
-        <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
             <div>
-                <h3 class="mb-2 text-xl font-bold dark:text-white">Marketing</h3>
-                <p class="text-gray-500 dark:text-gray-400">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month with our marketing plan.</p>
+                <h3
+                    class="text-sm font-semibold text-gray-300 uppercase tracking-wider"
+                >
+                    Support
+                </h3>
+                <ul class="mt-4 space-y-2">
+                    <li>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm"
+                        >Help Center</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm"
+                        >Contact Us</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm"
+                        >Privacy Policy</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm"
+                        >Terms of Service</a
+                        >
+                    </li>
+                </ul>
             </div>
             <div>
-                <h3 class="mb-2 text-xl font-bold dark:text-white">Legal</h3>
-                <p class="text-gray-500 dark:text-gray-400">Protect your organization, devices and stay compliant with our structured workflows and custom permissions made for you.</p>
-            </div>
-            <div>
-                <h3 class="mb-2 text-xl font-bold dark:text-white">Business Automation</h3>
-                <p class="text-gray-500 dark:text-gray-400">Auto-assign tasks, send Slack messages, and much more. Now power up with hundreds of new templates to help you get started.</p>
-            </div>
-            <div>
-                <h3 class="mb-2 text-xl font-bold dark:text-white">Finance</h3>
-                <p class="text-gray-500 dark:text-gray-400">Audit-proof software built for critical financial operations like month-end close and quarterly budgeting.</p>
-            </div>
-            <div>
-                <h3 class="mb-2 text-xl font-bold dark:text-white">Enterprise Design</h3>
-                <p class="text-gray-500 dark:text-gray-400">Craft beautiful, delightful experiences for both marketing and product with real cross-company collaboration.</p>
-            </div>
-            <div>
-                <h3 class="mb-2 text-xl font-bold dark:text-white">Operations</h3>
-                <p class="text-gray-500 dark:text-gray-400">Keep your company’s lights on with customizable, iterative, and structured workflows built for all efficient teams and individual.</p>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="bg-white dark:bg-gray-900">
-    <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
-        <div class="max-w-screen-md">
-            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Let's find more that brings us together.</h2>
-            <p class="mb-8 font-light text-gray-500 sm:text-xl dark:text-gray-400">Flowbite helps you connect with friends, family and communities of people who share your interests. Connecting with your friends and family as well as discovering new ones is easy with features like Groups, Watch and Marketplace.</p>
-            <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-                <a href="#" class="inline-flex items-center justify-center px-4 py-2.5 text-base font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-                    Get started
-                </a>
-                <a href="#" class="inline-flex items-center justify-center px-4 py-2.5 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-                    <svg class="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
-                    View more
-                </a>
+                <h3
+                    class="text-sm font-semibold text-gray-300 uppercase tracking-wider"
+                >
+                    Stay Updated
+                </h3>
+                <p class="mt-4 text-gray-400 text-sm">
+                    Subscribe to our newsletter for tips and updates.
+                </p>
+                <form class="mt-4">
+                    <div class="flex">
+                        <input
+                            type="email"
+                            placeholder="Your email"
+                            class="px-4 py-2 w-full bg-white rounded-l-button text-gray-900 text-sm border-none focus:outline-none focus:ring-2 focus:ring-primary"
+                        />
+                        <button
+                            type="submit"
+                            class="bg-primary px-4 py-2 rounded-r-button text-white text-sm font-medium hover:bg-opacity-90 whitespace-nowrap"
+                        >
+                            Subscribe
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
-</section>
-<footer class="p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800">
-    <div class="mx-auto max-w-screen-xl text-center">
-        <a href="#" class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white my-6">
-            <svg class="mr-2 h-8" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M25.2696 13.126C25.1955 13.6364 24.8589 14.3299 24.4728 14.9328C23.9856 15.6936 23.2125 16.2264 22.3276 16.4114L18.43 17.2265C17.8035 17.3575 17.2355 17.6853 16.8089 18.1621L14.2533 21.0188C13.773 21.5556 13.4373 21.4276 13.4373 20.7075C13.4315 20.7342 12.1689 23.9903 15.5149 25.9202C16.8005 26.6618 18.6511 26.3953 19.9367 25.6538L26.7486 21.7247C29.2961 20.2553 31.0948 17.7695 31.6926 14.892C31.7163 14.7781 31.7345 14.6639 31.7542 14.5498L25.2696 13.126Z" fill="url(#paint0_linear_11430_22515)"/><path d="M23.5028 9.20133C24.7884 9.94288 25.3137 11.0469 25.3137 12.53C25.3137 12.7313 25.2979 12.9302 25.2694 13.1261L28.0141 14.3051L31.754 14.5499C32.2329 11.7784 31.2944 8.92561 29.612 6.65804C28.3459 4.9516 26.7167 3.47073 24.7581 2.34097C23.167 1.42325 21.5136 0.818599 19.8525 0.486816L17.9861 2.90382L17.3965 5.67918L23.5028 9.20133Z" fill="url(#paint1_linear_11430_22515)"/><path d="M1.5336 11.2352C1.5329 11.2373 1.53483 11.238 1.53556 11.2358C1.67958 10.8038 1.86018 10.3219 2.08564 9.80704C3.26334 7.11765 5.53286 5.32397 8.32492 4.40943C11.117 3.49491 14.1655 3.81547 16.7101 5.28323L17.3965 5.67913L19.8525 0.486761C12.041 -1.07341 4.05728 3.51588 1.54353 11.2051C1.54233 11.2087 1.53796 11.2216 1.5336 11.2352Z" fill="url(#paint2_linear_11430_22515)"/><path d="M19.6699 25.6538C18.3843 26.3953 16.8003 26.3953 15.5147 25.6538C15.3402 25.5531 15.1757 25.4399 15.0201 25.3174L12.7591 26.8719L10.8103 30.0209C12.9733 31.821 15.7821 32.3997 18.589 32.0779C20.7013 31.8357 22.7995 31.1665 24.7582 30.0368C26.3492 29.1191 27.7 27.9909 28.8182 26.7195L27.6563 23.8962L25.7762 22.1316L19.6699 25.6538Z" fill="url(#paint3_linear_11430_22515)"/><path d="M15.0201 25.3175C14.0296 24.5373 13.4371 23.3406 13.4371 22.0588V21.931V11.2558C13.4371 10.6521 13.615 10.5494 14.1384 10.8513C13.3323 10.3864 11.4703 8.79036 9.17118 10.1165C7.88557 10.858 6.8269 12.4949 6.8269 13.978V21.8362C6.8269 24.775 8.34906 27.8406 10.5445 29.7966C10.6313 29.874 10.7212 29.9469 10.8103 30.0211L15.0201 25.3175Z" fill="url(#paint4_linear_11430_22515)"/><path d="M28.6604 5.49565C28.6589 5.49395 28.6573 5.49532 28.6589 5.49703C28.9613 5.83763 29.2888 6.23485 29.6223 6.68734C31.3648 9.05099 32.0158 12.0447 31.4126 14.9176C30.8093 17.7906 29.0071 20.2679 26.4625 21.7357L25.7761 22.1316L28.8181 26.7195C34.0764 20.741 34.09 11.5388 28.6815 5.51929C28.6789 5.51641 28.67 5.50622 28.6604 5.49565Z" fill="url(#paint5_linear_11430_22515)"/><path d="M7.09355 13.978C7.09354 12.4949 7.88551 11.1244 9.17113 10.3829C9.34564 10.2822 9.52601 10.1965 9.71002 10.1231L9.49304 7.38962L7.96861 4.26221C5.32671 5.23364 3.1897 7.24125 2.06528 9.83067C1.2191 11.7793 0.75001 13.9294 0.75 16.1888C0.75 18.0243 1.05255 19.7571 1.59553 21.3603L4.62391 21.7666L7.09355 21.0223V13.978Z" fill="url(#paint6_linear_11430_22515)"/><path d="M9.71016 10.1231C10.8817 9.65623 12.2153 9.74199 13.3264 10.3829L13.4372 10.4468L22.3326 15.5777C22.9566 15.9376 22.8999 16.2918 22.1946 16.4392L22.7078 16.332C23.383 16.1908 23.9999 15.8457 24.4717 15.3428C25.2828 14.4782 25.5806 13.4351 25.5806 12.5299C25.5806 11.0468 24.7886 9.67634 23.503 8.93479L16.6911 5.00568C14.1436 3.53627 11.0895 3.22294 8.29622 4.14442C8.18572 4.18087 8.07756 4.2222 7.96875 4.26221L9.71016 10.1231Z" fill="url(#paint7_linear_11430_22515)"/><path d="M20.0721 31.8357C20.0744 31.8352 20.0739 31.8332 20.0717 31.8337C19.6252 31.925 19.1172 32.0097 18.5581 32.0721C15.638 32.3978 12.7174 31.4643 10.5286 29.5059C8.33986 27.5474 7.09347 24.7495 7.09348 21.814L7.09347 21.0222L1.59546 21.3602C4.1488 28.8989 12.1189 33.5118 20.0411 31.8421C20.0449 31.8413 20.0582 31.8387 20.0721 31.8357Z" fill="url(#paint8_linear_11430_22515)"/>
-                <defs>
-                    <linearGradient id="paint0_linear_11430_22515" x1="20.8102" y1="23.9532" x2="23.9577" y2="12.9901" gradientUnits="userSpaceOnUse"><stop stop-color="#1724C9"/><stop offset="1" stop-color="#1C64F2"/></linearGradient>
-                    <linearGradient id="paint1_linear_11430_22515" x1="28.0593" y1="10.5837" x2="19.7797" y2="2.33321" gradientUnits="userSpaceOnUse"><stop stop-color="#1C64F2"/><stop offset="1" stop-color="#0092FF"/></linearGradient>
-                    <linearGradient id="paint2_linear_11430_22515" x1="16.9145" y1="5.2045" x2="4.42432" y2="5.99375" gradientUnits="userSpaceOnUse"><stop stop-color="#0092FF"/><stop offset="1" stop-color="#45B2FF"/></linearGradient>
-                    <linearGradient id="paint3_linear_11430_22515" x1="16.0698" y1="28.846" x2="27.2866" y2="25.8192" gradientUnits="userSpaceOnUse"><stop stop-color="#1C64F2"/><stop offset="1" stop-color="#0092FF"/></linearGradient>
-                    <linearGradient id="paint4_linear_11430_22515" x1="8.01881" y1="15.8661" x2="15.9825" y2="24.1181" gradientUnits="userSpaceOnUse"><stop stop-color="#1724C9"/><stop offset="1" stop-color="#1C64F2"/></linearGradient>
-                    <linearGradient id="paint5_linear_11430_22515" x1="26.2004" y1="21.8189" x2="31.7569" y2="10.6178" gradientUnits="userSpaceOnUse"><stop stop-color="#0092FF"/><stop offset="1" stop-color="#45B2FF"/></linearGradient>
-                    <linearGradient id="paint6_linear_11430_22515" x1="6.11387" y1="9.31427" x2="3.14054" y2="20.4898" gradientUnits="userSpaceOnUse"><stop stop-color="#1C64F2"/><stop offset="1" stop-color="#0092FF"/></linearGradient>
-                    <linearGradient id="paint7_linear_11430_22515" x1="21.2932" y1="8.78271" x2="10.4278" y2="11.488" gradientUnits="userSpaceOnUse"><stop stop-color="#1724C9"/><stop offset="1" stop-color="#1C64F2"/></linearGradient>
-                    <linearGradient id="paint8_linear_11430_22515" x1="7.15667" y1="21.5399" x2="14.0824" y2="31.9579" gradientUnits="userSpaceOnUse"><stop stop-color="#0092FF"/><stop offset="1" stop-color="#45B2FF"/></linearGradient>
-                </defs>
-            </svg>
-            Wishlist
-        </a>
-        <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
-            <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">Lost link?</a>
-            </li>
-            <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6">Contact</a>
-            </li>
-            <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6">FAQs</a>
-            </li>
-        </ul>
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 <a href="#" class="hover:underline">Wishlist™</a>. Made by Frank.</span>
+        <div
+            class="mt-12 pt-8 border-t border-gray-700 text-center text-gray-400 text-sm"
+        >
+            <p>© 2025 WishKeeper. All rights reserved.</p>
+        </div>
     </div>
 </footer>
+
 @RegisterServiceWorkerScript
 </body>
 </html>
