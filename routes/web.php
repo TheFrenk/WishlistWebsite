@@ -9,7 +9,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
 
 Route::group(['namespace' => 'App\Http\Controllers\Wishlist', 'prefix' => 'wishes'], function () {
    Route::get('/create', 'IndexController')->name('wishlist.create');
-   Route::get('/show', 'ShowController')->name('wishlist.show');
+   Route::post('/', 'StoreController')->name('wishlist.store');
+   Route::get('/show/{wishlist:slug}', 'ShowController@show')->name('wishlist.show');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'personal'], function () {

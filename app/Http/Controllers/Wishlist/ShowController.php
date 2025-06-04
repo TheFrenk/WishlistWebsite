@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Wishlist;
 
 use App\Http\Controllers\Controller;
+use App\Models\Wishlist;
 
 class ShowController extends Controller
 {
-    public function __invoke()
+    public function show(Wishlist $wishlist)
     {
-        return view('wishlist.show');
+        $wishlist->load('items');
+        return view('wishlist.show', compact('wishlist'));
     }
 }

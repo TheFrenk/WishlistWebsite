@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Psy\Util\Str;
+use Illuminate\Support\Str;
 
 class Wishlist extends Model
 {
-    protected $fillable = ['title', 'slug', 'is_public', 'token', 'user_id'];
+    protected $fillable = ['title', 'name', 'description', 'slug', 'is_public', 'token', 'user_id'];
 
     public function user()
     {
@@ -26,6 +26,11 @@ class Wishlist extends Model
         }
 
         return url("/wishlist/share/{$this->token}");
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
     protected static function boot()

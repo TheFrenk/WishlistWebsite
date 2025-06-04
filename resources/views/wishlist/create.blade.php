@@ -19,353 +19,222 @@
 
 @section('content')
 <main class="max-w-3xl mx-auto px-4 py-25">
-    <div class="bg-white shadow rounded-lg p-6 mb-6">
-        <p class="text-gray-600 mb-6">
-            Create your wishlist without an account. You'll receive a unique link
-            to access and share your wishlist.
-        </p>
+    <form action="{{ route('wishlist.store') }}" method="POST">
+        @csrf
+        <div class="bg-white shadow rounded-lg p-6 mb-6">
+            <p class="text-gray-600 mb-6">
+                Create your wishlist without an account. You'll receive a unique link
+                to access and share your wishlist.
+            </p>
 
-        <form id="wishlistForm">
-            <div class="mb-6">
-                <label for="wishlistTitle" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                <input
-                    type="text"
-                    id="wishlistTitle"
-                    placeholder="e.g. name, nickname, abbreviation, ..."
-                    required
-                    class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
-                />
-            </div>
-
-            <div class="mb-6">
-                <label for="wishlistTitle" class="block text-sm font-medium text-gray-700 mb-1">Wishlist Title</label>
-                <input
-                    type="text"
-                    id="wishlistTitle"
-                    placeholder="Enter Wishlist Name"
-                    required
-                    class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
-                />
-            </div>
-
-            <div class="mb-6">
-                <label for="wishlistDescription" class="block text-sm font-medium text-gray-700 mb-1">Description (optional)</label>
-                <textarea
-                    id="wishlistDescription"
-                    rows="3"
-                    placeholder="Add a description for your wishlist"
-                    class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
-                ></textarea>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Privacy Settings</label>
-                    <div class="flex items-center bg-gray-100 rounded-full p-1 w-fit">
-                        <button type="button" class="privacy-option selected px-4 py-2 rounded-full bg-white shadow text-gray-800 whitespace-nowrap !rounded-button">
-                            Public
-                        </button>
-                        <button type="button" class="privacy-option px-4 py-2 rounded-full text-gray-600 whitespace-nowrap !rounded-button">
-                            Private
-                        </button>
-                    </div>
+                <div class="mb-6">
+                    <label for="wishlistTitle" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                    <input
+                        name="wishlist[name]"
+                        type="text"
+                        placeholder="e.g. name, nickname, abbreviation, ..."
+                        required
+                        class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
+                    />
                 </div>
 
-                <div>
-                    <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Category (optional)</label>
-                    <div class="relative">
-                        <button
-                            type="button"
-                            id="categoryButton"
-                            class="w-full flex items-center justify-between px-4 py-3 border border-gray-300 rounded bg-white text-left focus:ring-2 focus:ring-primary focus:border-primary outline-none transition !rounded-button"
-                        >
-                            <span id="selectedCategory">Select a category</span>
-                            <span class="w-5 h-5 flex items-center justify-center">
-                    <i class="ri-arrow-down-s-line"></i>
-                  </span>
-                        </button>
-                        <div
-                            id="categoryDropdown"
-                            class="hidden absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded shadow-lg"
-                        >
-                            <div class="py-1 max-h-60 overflow-y-auto">
-                                <button
-                                    type="button"
-                                    class="category-option block w-full px-4 py-2 text-left hover:bg-gray-100 whitespace-nowrap"
-                                >
-                                    Birthday
-                                </button>
-                                <button
-                                    type="button"
-                                    class="category-option block w-full px-4 py-2 text-left hover:bg-gray-100 whitespace-nowrap"
-                                >
-                                    Wedding
-                                </button>
-                                <button
-                                    type="button"
-                                    class="category-option block w-full px-4 py-2 text-left hover:bg-gray-100 whitespace-nowrap"
-                                >
-                                    Baby Shower
-                                </button>
-                                <button
-                                    type="button"
-                                    class="category-option block w-full px-4 py-2 text-left hover:bg-gray-100 whitespace-nowrap"
-                                >
-                                    Holiday
-                                </button>
-                                <button
-                                    type="button"
-                                    class="category-option block w-full px-4 py-2 text-left hover:bg-gray-100 whitespace-nowrap"
-                                >
-                                    Graduation
-                                </button>
-                                <button
-                                    type="button"
-                                    class="category-option block w-full px-4 py-2 text-left hover:bg-gray-100 whitespace-nowrap"
-                                >
-                                    Housewarming
-                                </button>
-                                <button
-                                    type="button"
-                                    class="category-option block w-full px-4 py-2 text-left hover:bg-gray-100 whitespace-nowrap"
-                                >
-                                    Other
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="mb-6">
+                    <label for="wishlistTitle" class="block text-sm font-medium text-gray-700 mb-1">Wishlist Title</label>
+                    <input
+                        name="wishlist[title]"
+                        type="text"
+                        placeholder="Enter Wishlist Name"
+                        required
+                        class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
+                    />
                 </div>
-            </div>
-        </form>
-    </div>
 
-    <div class="bg-white shadow rounded-lg p-6 mb-6">
-        <div class="flex items-center justify-between mb-6">
-            <h2 class="text-xl font-semibold text-gray-800">Wishlist Items</h2>
-            <div class="flex items-center space-x-2">
-                <button
-                    id="previewButton"
-                    class="flex items-center px-4 py-2 text-gray-600 border border-gray-300 rounded hover:bg-gray-50 transition whitespace-nowrap !rounded-button"
-                >
-              <span class="w-5 h-5 flex items-center justify-center mr-2">
-                <i class="ri-eye-line"></i>
-              </span>
-                    Preview
-                </button>
-            </div>
-        </div>
+                <div class="mb-6">
+                    <label for="wishlistDescription" class="block text-sm font-medium text-gray-700 mb-1">Description (optional)</label>
+                    <textarea
+                        name="wishlist[description]"
+                        rows="3"
+                        placeholder="Add a description for your wishlist"
+                        class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
+                    ></textarea>
+                </div>
 
-        <div id="itemsList" class="space-y-4">
-            <div class="item-entry bg-gray-50 rounded-lg p-4 border border-gray-200" data-index="${index}">
-                <div class="flex items-start gap-3">
-                    <div class="drag-handle w-6 h-6 flex items-center justify-center text-gray-400 mt-3">
-                        <i class="ri-drag-move-line"></i>
-                    </div>
-                    <div class="flex-1">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Item Name*</label>
-                                <input type="text" placeholder="Enter item name" required
-                                       class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Price (optional)</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <span class="text-gray-500">$</span>
-                                    </div>
-                                    <input type="number" placeholder="0.00" min="0" step="0.01"
-                                           class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Link (optional)</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                              <span class="w-5 h-5 flex items-center justify-center text-gray-500">
-                                                  <i class="ri-link"></i>
-                                              </span>
-                                </div>
-                                <input type="url" placeholder="https://example.com/product"
-                                       class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition">
-                            </div>
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Notes (optional)</label>
-                            <textarea rows="2" placeholder="Add any details or specifications"
-                                      class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"></textarea>
-                        </div>
-
-                        <div class="flex flex-wrap items-center justify-between gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
-                                <div class="flex items-center bg-white rounded-full border border-gray-300 p-1">
-                                    <button type="button" class="priority-option px-3 py-1 rounded-full text-gray-600 text-sm whitespace-nowrap !rounded-button">Low</button>
-                                    <button type="button" class="priority-option selected px-3 py-1 rounded-full bg-primary text-white text-sm whitespace-nowrap !rounded-button">Medium</button>
-                                    <button type="button" class="priority-option px-3 py-1 rounded-full text-gray-600 text-sm whitespace-nowrap !rounded-button">High</button>
-                                </div>
-                            </div>
-
-                            <button type="button" class="remove-item text-gray-500 hover:text-red-500 transition flex items-center">
-                                          <span class="w-5 h-5 flex items-center justify-center mr-1">
-                                              <i class="ri-delete-bin-line"></i>
-                                          </span>
-                                Remove
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Privacy Settings</label>
+                        <div class="flex items-center bg-gray-100 rounded-full p-1 w-fit">
+                            <button type="button" class="privacy-option selected px-4 py-2 rounded-full bg-white shadow text-gray-800 whitespace-nowrap !rounded-button">
+                                Public
+                            </button>
+                            <button type="button" class="privacy-option px-4 py-2 rounded-full text-gray-600 whitespace-nowrap !rounded-button">
+                                Private
                             </button>
                         </div>
                     </div>
+
+                    <div>
+                        <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Category (optional)</label>
+                        <div class="relative">
+                            <button
+                                type="button"
+                                id="categoryButton"
+                                class="w-full flex items-center justify-between px-4 py-3 border border-gray-300 rounded bg-white text-left focus:ring-2 focus:ring-primary focus:border-primary outline-none transition !rounded-button"
+                            >
+                                <span id="selectedCategory">Select a category</span>
+                                <span class="w-5 h-5 flex items-center justify-center">
+                        <i class="ri-arrow-down-s-line"></i>
+                      </span>
+                            </button>
+                            <div
+                                id="categoryDropdown"
+                                class="hidden absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded shadow-lg"
+                            >
+                                <div class="py-1 max-h-60 overflow-y-auto">
+                                    <button
+                                        type="button"
+                                        class="category-option block w-full px-4 py-2 text-left hover:bg-gray-100 whitespace-nowrap"
+                                    >
+                                        Birthday
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="category-option block w-full px-4 py-2 text-left hover:bg-gray-100 whitespace-nowrap"
+                                    >
+                                        Wedding
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="category-option block w-full px-4 py-2 text-left hover:bg-gray-100 whitespace-nowrap"
+                                    >
+                                        Baby Shower
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="category-option block w-full px-4 py-2 text-left hover:bg-gray-100 whitespace-nowrap"
+                                    >
+                                        Holiday
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="category-option block w-full px-4 py-2 text-left hover:bg-gray-100 whitespace-nowrap"
+                                    >
+                                        Graduation
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="category-option block w-full px-4 py-2 text-left hover:bg-gray-100 whitespace-nowrap"
+                                    >
+                                        Housewarming
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="category-option block w-full px-4 py-2 text-left hover:bg-gray-100 whitespace-nowrap"
+                                    >
+                                        Other
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
         </div>
 
-        <button
-            id="addItemButton"
-            class="mt-6 flex items-center justify-center w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-primary hover:bg-gray-50 transition !rounded-button"
-        >
-          <span class="w-6 h-6 flex items-center justify-center mr-2">
-            <i class="ri-add-line ri-lg"></i>
-          </span>
-            Add Item
-        </button>
-    </div>
-
-    <div class="bg-white shadow rounded-lg p-6 mb-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Share Options</h2>
-        <div class="flex flex-col md:flex-row gap-4">
-            <div class="flex-1">
-                <label class="block text-sm font-medium text-gray-700 mb-1">Shareable Link</label>
-                <div class="flex">
-                    <input
-                        type="text"
-                        value="https://wishlist.example.com/s/abcd1234"
-                        readonly
-                        class="flex-1 px-4 py-3 border border-gray-300 rounded-l focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
-                    />
-                    <button type="button" class="px-4 py-3 bg-gray-100 border border-gray-300 border-l-0 rounded-r hover:bg-gray-200 transition !rounded-button">
-                <span class="w-5 h-5 flex items-center justify-center">
-                  <i class="ri-file-copy-line"></i>
-                </span>
+        <div class="bg-white shadow rounded-lg p-6 mb-6">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold text-gray-800">Wishlist Items</h2>
+                <div class="flex items-center space-x-2">
+                    <button
+                        id="previewButton"
+                        class="flex items-center px-4 py-2 text-gray-600 border border-gray-300 rounded hover:bg-gray-50 transition whitespace-nowrap !rounded-button"
+                    >
+                  <span class="w-5 h-5 flex items-center justify-center mr-2">
+                    <i class="ri-eye-line"></i>
+                  </span>
+                        Preview
                     </button>
                 </div>
             </div>
-            <div class="flex-1">
-                <label class="block text-sm font-medium text-gray-700 mb-1">Edit Link</label>
-                <div class="flex">
-                    <input
-                        type="text"
-                        value="https://wishlist.example.com/s/abcd1234"
-                        readonly
-                        class="flex-1 px-4 py-3 border border-gray-300 rounded-l focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
-                    />
-                    <button type="button" class="px-4 py-3 bg-gray-100 border border-gray-300 border-l-0 rounded-r hover:bg-gray-200 transition !rounded-button">
-                <span class="w-5 h-5 flex items-center justify-center">
-                  <i class="ri-file-copy-line"></i>
-                </span>
-                    </button>
+
+            <div id="itemsList" class="space-y-4">
+
+            </div>
+
+            <button
+                id="addItemButton"
+                type="button"
+                class="mt-6 flex items-center justify-center w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-primary hover:bg-gray-50 transition !rounded-button"
+            >
+              <span class="w-6 h-6 flex items-center justify-center mr-2">
+                <i class="ri-add-line ri-lg"></i>
+              </span>
+                Add Item
+            </button>
+        </div>
+
+        <div class="bg-white shadow rounded-lg p-6 mb-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Share Options</h2>
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="flex-1">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Shareable Link</label>
+                    <div class="flex">
+                        <input
+                            type="text"
+                            value="https://wishlist.example.com/s/abcd1234"
+                            readonly
+                            class="flex-1 px-4 py-3 border border-gray-300 rounded-l focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
+                        />
+                        <button type="button" class="px-4 py-3 bg-gray-100 border border-gray-300 border-l-0 rounded-r hover:bg-gray-200 transition !rounded-button">
+                    <span class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-file-copy-line"></i>
+                    </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Edit Link</label>
+                    <div class="flex">
+                        <input
+                            type="text"
+                            value="https://wishlist.example.com/s/abcd1234"
+                            readonly
+                            class="flex-1 px-4 py-3 border border-gray-300 rounded-l focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
+                        />
+                        <button type="button" class="px-4 py-3 bg-gray-100 border border-gray-300 border-l-0 rounded-r hover:bg-gray-200 transition !rounded-button">
+                    <span class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-file-copy-line"></i>
+                    </span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <button
-            type="button"
-            class="order-3 md:order-1 text-gray-600 hover:text-gray-800 transition whitespace-nowrap"
-        >
-            Cancel
-        </button>
-
-        <div class="order-2 flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
             <button
                 type="button"
-                id="saveDraftButton"
-                class="px-6 py-3 border border-gray-300 rounded bg-white text-gray-700 hover:bg-gray-50 transition whitespace-nowrap !rounded-button"
+                class="order-3 md:order-1 text-gray-600 hover:text-gray-800 transition whitespace-nowrap"
             >
-                Save as Draft
+                Cancel
             </button>
-            <button
-                type="button"
-                id="createWishlistButton"
-                class="px-6 py-3 bg-primary text-white rounded hover:bg-primary/90 transition whitespace-nowrap !rounded-button"
-            >
-                Create Wishlist
-            </button>
+
+            <div class="order-2 flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                <button
+                    type="button"
+                    id="saveDraftButton"
+                    class="px-6 py-3 border border-gray-300 rounded bg-white text-gray-700 hover:bg-gray-50 transition whitespace-nowrap !rounded-button"
+                >
+                    Save as Draft
+                </button>
+                <button
+                    type="submit"
+                    id="createWishlistButton"
+                    class="px-6 py-3 bg-primary text-white rounded hover:bg-primary/90 transition whitespace-nowrap !rounded-button">
+                    Create Wishlist
+                </button>
+            </div>
         </div>
-    </div>
+    </form>
 </main>
-
-<script id="itemTemplate">
-    function createItemTemplate(index) {
-        return `
-                      <div class="item-entry bg-gray-50 rounded-lg p-4 border border-gray-200" data-index="${index}">
-                          <div class="flex items-start gap-3">
-                              <div class="drag-handle w-6 h-6 flex items-center justify-center text-gray-400 mt-3">
-                                  <i class="ri-drag-move-line"></i>
-                              </div>
-                              <div class="flex-1">
-                                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                                      <div>
-                                          <label class="block text-sm font-medium text-gray-700 mb-1">Item Name*</label>
-                                          <input type="text" placeholder="Enter item name" required
-                                              class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition">
-                                      </div>
-                                      <div>
-                                          <label class="block text-sm font-medium text-gray-700 mb-1">Price (optional)</label>
-                                          <div class="relative">
-                                              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                                  <span class="text-gray-500">$</span>
-                                              </div>
-                                              <input type="number" placeholder="0.00" min="0" step="0.01"
-                                                  class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition">
-                                          </div>
-                                      </div>
-                                  </div>
-
-                                  <div class="mb-4">
-                                      <label class="block text-sm font-medium text-gray-700 mb-1">Link (optional)</label>
-                                      <div class="relative">
-                                          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                              <span class="w-5 h-5 flex items-center justify-center text-gray-500">
-                                                  <i class="ri-link"></i>
-                                              </span>
-                                          </div>
-                                          <input type="url" placeholder="https://example.com/product"
-                                              class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition">
-                                      </div>
-                                  </div>
-
-                                  <div class="mb-4">
-                                      <label class="block text-sm font-medium text-gray-700 mb-1">Notes (optional)</label>
-                                      <textarea rows="2" placeholder="Add any details or specifications"
-                                          class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"></textarea>
-                                  </div>
-
-                                  <div class="flex flex-wrap items-center justify-between gap-4">
-                                      <div>
-                                          <label class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
-                                          <div class="flex items-center bg-white rounded-full border border-gray-300 p-1">
-                                              <button type="button" class="priority-option px-3 py-1 rounded-full text-gray-600 text-sm whitespace-nowrap !rounded-button">Low</button>
-                                              <button type="button" class="priority-option selected px-3 py-1 rounded-full bg-primary text-white text-sm whitespace-nowrap !rounded-button">Medium</button>
-                                              <button type="button" class="priority-option px-3 py-1 rounded-full text-gray-600 text-sm whitespace-nowrap !rounded-button">High</button>
-                                          </div>
-                                      </div>
-
-                                      <button type="button" class="remove-item text-gray-500 hover:text-red-500 transition flex items-center">
-                                          <span class="w-5 h-5 flex items-center justify-center mr-1">
-                                              <i class="ri-delete-bin-line"></i>
-                                          </span>
-                                          Remove
-                                      </button>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  `;
-    }
-</script>
 
 <script id="privacyToggleScript">
     document.addEventListener("DOMContentLoaded", function () {
@@ -415,6 +284,74 @@
 </script>
 
 <script id="itemManagementScript">
+    function createItemTemplate(index) {
+        return `
+                      <div class="item-entry bg-gray-50 rounded-lg p-4 border border-gray-200" data-index="${index}">
+                          <div class="flex items-start gap-3">
+                              <div class="drag-handle w-6 h-6 flex items-center justify-center text-gray-400 mt-3">
+                                  <i class="ri-drag-move-line"></i>
+                              </div>
+                              <div class="flex-1">
+                                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                      <div>
+                                          <label class="block text-sm font-medium text-gray-700 mb-1">Item Name</label>
+                                          <input type="text" name="items[${index}][name]" placeholder="Enter item name" required
+                                              class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition">
+                                      </div>
+                                      <div>
+                                          <label class="block text-sm font-medium text-gray-700 mb-1">Price (optional)</label>
+                                          <div class="relative">
+                                              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                                  <span class="text-gray-500">$</span>
+                                              </div>
+                                              <input type="number" name="items[${index}][price]" placeholder="0.00" min="0" step="0.01"
+                                                  class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition">
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="mb-4">
+                                      <label class="block text-sm font-medium text-gray-700 mb-1">Link (optional)</label>
+                                      <div class="relative">
+                                          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                              <span class="w-5 h-5 flex items-center justify-center text-gray-500">
+                                                  <i class="ri-link"></i>
+                                              </span>
+                                          </div>
+                                          <input type="url" name="items[${index}][product_url]" placeholder="https://example.com/product"
+                                              class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition">
+                                      </div>
+                                  </div>
+
+                                  <div class="mb-4">
+                                      <label class="block text-sm font-medium text-gray-700 mb-1">Notes (optional)</label>
+                                      <textarea rows="2" name="items[${index}][description]" placeholder="Add any details or specifications"
+                                          class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"></textarea>
+                                  </div>
+
+                                  <div class="flex flex-wrap items-center justify-between gap-4">
+                                      <div>
+                                          <label class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                                          <div class="flex items-center bg-white rounded-full border border-gray-300 p-1">
+                                              <button type="button" class="priority-option px-3 py-1 rounded-full text-gray-600 text-sm whitespace-nowrap !rounded-button">Low</button>
+                                              <button type="button" class="priority-option selected px-3 py-1 rounded-full bg-primary text-white text-sm whitespace-nowrap !rounded-button">Medium</button>
+                                              <button type="button" class="priority-option px-3 py-1 rounded-full text-gray-600 text-sm whitespace-nowrap !rounded-button">High</button>
+                                          </div>
+                                      </div>
+
+                                      <button type="button" class="remove-item text-gray-500 hover:text-red-500 transition flex items-center">
+                                          <span class="w-5 h-5 flex items-center justify-center mr-1">
+                                              <i class="ri-delete-bin-line"></i>
+                                          </span>
+                                          Remove
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  `;
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
         const itemsList = document.getElementById("itemsList");
         const addItemButton = document.getElementById("addItemButton");
@@ -517,98 +454,4 @@
     });
 </script>
 
-<script id="formSubmissionScript">
-    document.addEventListener("DOMContentLoaded", function () {
-        const saveDraftButton = document.getElementById("saveDraftButton");
-        const createWishlistButton = document.getElementById("createWishlistButton");
-        const wishlistForm = document.getElementById("wishlistForm");
-
-        // Auto-save functionality
-        let autoSaveTimeout;
-        const formInputs = document.querySelectorAll("input, textarea, select");
-
-        formInputs.forEach((input) => {
-            input.addEventListener("input", function () {
-                clearTimeout(autoSaveTimeout);
-                autoSaveTimeout = setTimeout(function () {
-                    saveFormData("autosave");
-                }, 3000);
-            });
-        });
-
-        saveDraftButton.addEventListener("click", function () {
-            saveFormData("draft");
-        });
-
-        createWishlistButton.addEventListener("click", function () {
-            if (validateForm()) {
-                saveFormData("final");
-                alert(
-                    "Your wishlist has been created! You can now share it with others.",
-                );
-            }
-        });
-
-        function validateForm() {
-            const title = document.getElementById("wishlistTitle").value.trim();
-            if (!title) {
-                alert("Please enter a wishlist title.");
-                return false;
-            }
-
-            const itemEntries = document.querySelectorAll(".item-entry");
-            let valid = true;
-
-            itemEntries.forEach((item) => {
-                const itemName = item
-                    .querySelector('input[placeholder="Enter item name"]')
-                    .value.trim();
-                if (!itemName) {
-                    alert("Please enter a name for all items.");
-                    valid = false;
-                }
-            });
-
-            return valid;
-        }
-
-        function saveFormData(saveType) {
-            // In a real application, this would save to localStorage or send to a server
-            console.log(`Saving wishlist data (${saveType})`);
-
-            if (saveType === "draft") {
-                // Show confirmation for manual save
-                const saveConfirmation = document.createElement("div");
-                saveConfirmation.className =
-                    "fixed bottom-4 right-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-lg";
-                saveConfirmation.innerHTML = `
-                              <div class="flex items-center">
-                                  <span class="w-6 h-6 flex items-center justify-center mr-2">
-                                      <i class="ri-check-line"></i>
-                                  </span>
-                                  <p>Draft saved successfully!</p>
-                              </div>
-                          `;
-                document.body.appendChild(saveConfirmation);
-
-                setTimeout(() => {
-                    saveConfirmation.remove();
-                }, 3000);
-            }
-        }
-    });
-</script>
-
-<script id="previewScript">
-    document.addEventListener("DOMContentLoaded", function () {
-        const previewButton = document.getElementById("previewButton");
-
-        previewButton.addEventListener("click", function () {
-            // In a real application, this would show a preview modal or navigate to a preview page
-            alert(
-                "Preview functionality would show how your wishlist appears to others.",
-            );
-        });
-    });
-</script>
 @endsection
