@@ -58,20 +58,6 @@
                         class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
                     ></textarea>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Privacy Settings</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-1 w-fit">
-                            <button type="button" class="privacy-option selected px-4 py-2 rounded-full bg-white shadow text-gray-800 whitespace-nowrap !rounded-button">
-                                Public
-                            </button>
-                            <button type="button" class="privacy-option px-4 py-2 rounded-full text-gray-600 whitespace-nowrap !rounded-button">
-                                Private
-                            </button>
-                        </div>
-                    </div>
-
                     <div>
                         <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Category (optional)</label>
                         <div class="relative">
@@ -137,7 +123,6 @@
                         </div>
                     </div>
                 </div>
-        </div>
 
         <div class="bg-white shadow rounded-lg p-6 mb-6">
             <div class="flex items-center justify-between mb-6">
@@ -162,12 +147,11 @@
             <button
                 id="addItemButton"
                 type="button"
-                class="mt-6 flex items-center justify-center w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-primary hover:bg-gray-50 transition !rounded-button"
-            >
-              <span class="w-6 h-6 flex items-center justify-center mr-2">
-                <i class="ri-add-line ri-lg"></i>
-              </span>
-                Add Item
+                class="mt-6 flex items-center justify-center w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-primary hover:bg-gray-50 transition !rounded-button">
+                  <span class="w-6 h-6 flex items-center justify-center mr-2">
+                    <i class="ri-add-line ri-lg"></i>
+                  </span>
+                    Add Item
             </button>
         </div>
 
@@ -235,24 +219,6 @@
         </div>
     </form>
 </main>
-
-<script id="privacyToggleScript">
-    document.addEventListener("DOMContentLoaded", function () {
-        const privacyOptions = document.querySelectorAll(".privacy-option");
-
-        privacyOptions.forEach((option) => {
-            option.addEventListener("click", function () {
-                privacyOptions.forEach((opt) => {
-                    opt.classList.remove("selected", "bg-white", "shadow", "text-gray-800");
-                    opt.classList.add("text-gray-600");
-                });
-
-                this.classList.add("selected", "bg-white", "shadow", "text-gray-800");
-                this.classList.remove("text-gray-600");
-            });
-        });
-    });
-</script>
 
 <script id="categoryDropdownScript">
     document.addEventListener("DOMContentLoaded", function () {
@@ -329,6 +295,19 @@
                                           class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"></textarea>
                                   </div>
 
+                                  <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Photo (optional)</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                            <span class="w-5 h-5 flex items-center justify-center text-gray-500">
+                                                <i class="ri-image-line"></i>
+                                            </span>
+                                        </div>
+                                        <input type="file" name="items[${index}][photo]" accept="image/*"
+                                            class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition file:border-0 file:bg-transparent file:text-gray-700 file:mr-3">
+                                    </div>
+                                </div>
+
                                   <div class="flex flex-wrap items-center justify-between gap-4">
                                       <div>
                                           <label class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
@@ -357,29 +336,22 @@
         const addItemButton = document.getElementById("addItemButton");
         let itemCount = 0;
 
-        // Add initial item
-        addNewItem();
-
         addItemButton.addEventListener("click", addNewItem);
 
         function addNewItem() {
-            const newItem = document.createElement("div");
-            newItem.innerHTML = createItemTemplate(itemCount++);
-            itemsList.appendChild(newItem.firstElementChild);
+            const newItemWrapper = document.createElement("div");
+            newItemWrapper.innerHTML = createItemTemplate(itemCount++);
+            const newItem = newItemWrapper.firstElementChild;
 
-            // Setup priority selection for the new item
-            setupPrioritySelection(newItem.firstElementChild);
+            itemsList.appendChild(newItem);
 
-            // Setup remove button
-            const removeButton =
-                newItem.firstElementChild.querySelector(".remove-item");
+            const removeButton = newItem.querySelector(".remove-item");
+
             removeButton.addEventListener("click", function () {
-                if (itemsList.children.length > 1) {
-                    this.closest(".item-entry").remove();
-                } else {
-                    alert("You need at least one item in your wishlist.");
-                }
+                this.closest(".item-entry").remove();
             });
+
+            setupPrioritySelection(newItem);
         }
 
         function setupPrioritySelection(itemElement) {
@@ -417,7 +389,6 @@
                 document.addEventListener("mousemove", onMouseMove);
                 document.addEventListener("mouseup", onMouseUp);
 
-                // Prevent text selection during drag
                 e.preventDefault();
             }
         });
@@ -429,7 +400,6 @@
                 itemsList.querySelectorAll(".item-entry:not(.dragging)"),
             );
 
-            // Find the element we're hovering over
             const nextItem = itemEntries.find((item) => {
                 const box = item.getBoundingClientRect();
                 return e.clientY < box.top + box.height / 2;

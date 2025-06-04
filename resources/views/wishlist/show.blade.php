@@ -13,7 +13,7 @@
                     <i class="ri-calendar-line"></i>
                     <span>{{ $wishlist->created_at }}</span>
                 </div>
-                <span class="text-sm text-indigo-600">0/3 fulfilled</span>
+                <span class="text-sm text-indigo-600">{{ $wishlist->items->where('is_completed', true)->count() }}/{{ $wishlist->items->count() }} fulfilled</span>
             </div>
             <p class="mt-4 text-sm italic text-gray-500">{{ $wishlist->description }}</p>
         </div>
@@ -35,9 +35,17 @@
 
                     <div class="mt-4 flex justify-between items-center">
                         <a href="{{ $item->product_url }}" class="text-sm font-medium text-indigo-600 hover:underline">View Product</a>
-                        <button class="bg-indigo-600 text-white text-xs px-3 py-1.5 rounded hover:bg-indigo-700 transition">
-                            Mark as Fulfilled
-                        </button>
+                        @if (!$item->is_completed)
+                            <form action="{{ route('wishlist.items.complete', $item) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="bg-indigo-600 text-white text-xs px-3 py-1.5 rounded hover:bg-indigo-700 transition">
+                                    Mark as Fulfilled
+                                </button>
+                            </form>
+                        @else
+                            <span class="text-xs text-gray-500">Complete</span>
+                        @endif
                     </div>
             @endforeach
             </div>
