@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('image_url')->nullable();
             $table->string('product_url')->nullable();
+            $table->string('closed_by')->nullable();
             $table->decimal('price', 10, 2)->nullable();
             $table->foreignId('currency_id')->nullable()->constrained()->nullOnDelete();
             $table->boolean('is_completed')->default(false);

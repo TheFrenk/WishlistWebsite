@@ -194,12 +194,9 @@
         </div>
 
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-            <button
-                type="button"
-                class="order-3 md:order-1 text-gray-600 hover:text-gray-800 transition whitespace-nowrap"
-            >
+            <a href="{{ route('main.index') }}" class="order-3 md:order-1 text-gray-600 hover:text-gray-800 transition whitespace-nowrap">
                 Cancel
-            </button>
+            </a>
 
             <div class="order-2 flex flex-col sm:flex-row gap-4 w-full md:w-auto">
                 <button
